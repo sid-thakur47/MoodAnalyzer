@@ -19,14 +19,15 @@ public class MoodAnalyzer {
     }
 
     public String analyzeMood() {
-        try {
-            if (message.equals( "im in sad mood" )) {
-                return "SAD";
-            } else {
-                return "HAPPY";
-            }
-        } catch (NullPointerException e) {
+
+        if (message == null) {
+            return "HAPPY";
+        } else if (message.equals( "im in sad mood" )) {
             return "SAD";
+        } else if (message.equals( "im in happy mood" )) {
+            return "SAD";
+        } else {
+            return "HAPPY";
         }
     }
 }
