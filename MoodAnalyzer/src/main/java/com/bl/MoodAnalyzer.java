@@ -13,15 +13,16 @@ public class MoodAnalyzer {
         return message;
     }
 
-    public String analyzeMood() {
-        if (message == null) {
-            return "HAPPY";
-        } else if (message.equals( "im in sad mood" )) {
+    public String analyzeMood(String message) {
+        if (message.equals( "im in sad mood" )) {
             return "SAD";
         } else if (message.equals( "im in happy mood" )) {
-            return "SAD";
-        } else {
             return "HAPPY";
+        } else {
+            return "SAD";
         }
+    }
+    public String analyzeMood() {
+        return analyzeMood( this.message );
     }
 }
