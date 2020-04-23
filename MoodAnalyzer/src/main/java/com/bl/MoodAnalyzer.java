@@ -1,13 +1,11 @@
 package com.bl;
 
-import java.io.IOException;
-
-public class MoodAnalyzer {
+public class MoodAnalyzer extends MoodAnalyzerException {
 
     String message;
 
-    public MoodAnalyzer()  {
-        this.message="HAPPY";
+    public MoodAnalyzer() {
+        this.message = "HAPPY";
     }
     public MoodAnalyzer(String message) {
         this.message = message;
@@ -16,18 +14,22 @@ public class MoodAnalyzer {
         return message;
     }
 
-    public String analyzeMood(String message) {
+    public String analyzeMood(String message) throws MoodAnalyzerException {
         try {
+            if (message.equals( " " )) {
+                throw new MoodAnalyzerException( ExceptionEnum.EMPTY,"Mood cannot be empty");
+
+            }
             if (message.equals( "im in happy mood" )) {
                 return "HAPPY";
             } else {
                 return "SAD";
             }
         } catch (NullPointerException e) {
-            return "HAPPY";
+            throw new MoodAnalyzerException( ExceptionEnum.NULL,"Mood cannot be null");
         }
     }
-    public String analyzeMood() {
+    public String analyzeMood() throws MoodAnalyzerException {
         return analyzeMood( this.message );
     }
 }
