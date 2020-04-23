@@ -6,7 +6,6 @@ public class MoodAnalyzer {
 
     public MoodAnalyzer() {
     }
-
     public MoodAnalyzer(String message) {
         this.message = message;
     }
@@ -15,7 +14,6 @@ public class MoodAnalyzer {
     }
 
     public String analyzeMood() {
-
         if (message == null) {
             return "HAPPY";
         } else if (message.equals( "im in sad mood" )) {
