@@ -30,7 +30,7 @@ public class MoodAnalyzerTest {
     }
     @Test
     public void given_Null_ShouldReturn_NullExceptionMessage() throws MoodAnalyzerException {
-        MoodAnalyzer moodAnalyzer = new MoodAnalyzer( null );
+        MoodAnalyzer moodAnalyzer = new MoodAnalyzer();
         try {
             String mood = moodAnalyzer.analyzeMood( null );
         } catch (MoodAnalyzerException e) {
@@ -39,7 +39,7 @@ public class MoodAnalyzerTest {
     }
     @Test
     public void given_Empty_ShouldReturn_EmptyExceptionMessage() throws MoodAnalyzerException {
-        MoodAnalyzer moodAnalyzer = new MoodAnalyzer( " " );
+        MoodAnalyzer moodAnalyzer = new MoodAnalyzer();
         try {
             String mood = moodAnalyzer.analyzeMood( " " );
         } catch (MoodAnalyzerException e) {

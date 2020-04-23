@@ -17,7 +17,7 @@ public class MoodAnalyzer extends MoodAnalyzerException {
     public String analyzeMood(String message) throws MoodAnalyzerException {
         try {
             if (message.equals( " " )) {
-                throw new MoodAnalyzerException( ExceptionEnum.EMPTY,"Mood cannot be empty");
+                throw new MoodAnalyzerException( ExceptionEnum.EMPTY.getExceptionMessage());
 
             }
             if (message.equals( "im in happy mood" )) {
@@ -26,7 +26,7 @@ public class MoodAnalyzer extends MoodAnalyzerException {
                 return "SAD";
             }
         } catch (NullPointerException e) {
-            throw new MoodAnalyzerException( ExceptionEnum.NULL,"Mood cannot be null");
+            throw new MoodAnalyzerException( ExceptionEnum.NULL.getExceptionMessage());
         }
     }
     public String analyzeMood() throws MoodAnalyzerException {
