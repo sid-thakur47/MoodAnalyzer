@@ -1,10 +1,13 @@
 package com.bl;
 
+import java.io.IOException;
+
 public class MoodAnalyzer {
 
     String message;
 
-    public MoodAnalyzer() {
+    public MoodAnalyzer()  {
+        this.message="HAPPY";
     }
     public MoodAnalyzer(String message) {
         this.message = message;
@@ -14,12 +17,14 @@ public class MoodAnalyzer {
     }
 
     public String analyzeMood(String message) {
-        if (message.equals( "im in sad mood" )) {
-            return "SAD";
-        } else if (message.equals( "im in happy mood" )) {
+        try {
+            if (message.equals( "im in happy mood" )) {
+                return "HAPPY";
+            } else {
+                return "SAD";
+            }
+        } catch (NullPointerException e) {
             return "HAPPY";
-        } else {
-            return "SAD";
         }
     }
     public String analyzeMood() {
