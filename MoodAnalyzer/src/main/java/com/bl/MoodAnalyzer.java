@@ -5,7 +5,7 @@ public class MoodAnalyzer extends MoodAnalyzerException {
     String message;
 
     public MoodAnalyzer() {
-        this.message = "HAPPY";
+//        this.message = "HAPPY";
     }
     public MoodAnalyzer(String message) {
         this.message = message;
@@ -16,9 +16,8 @@ public class MoodAnalyzer extends MoodAnalyzerException {
 
     public String analyzeMood(String message) throws MoodAnalyzerException {
         try {
-            if (message.equals( " " )) {
-                throw new MoodAnalyzerException( ExceptionEnum.EMPTY.getExceptionMessage());
-
+            if (message.equals( "" )) {
+                throw new MoodAnalyzerException( ExceptionEnum.EMPTY.getExceptionMessage() );
             }
             if (message.equals( "im in happy mood" )) {
                 return "HAPPY";
@@ -26,7 +25,7 @@ public class MoodAnalyzer extends MoodAnalyzerException {
                 return "SAD";
             }
         } catch (NullPointerException e) {
-            throw new MoodAnalyzerException( ExceptionEnum.NULL.getExceptionMessage());
+            throw new MoodAnalyzerException( ExceptionEnum.NULL.getExceptionMessage() );
         }
     }
     public String analyzeMood() throws MoodAnalyzerException {

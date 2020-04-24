@@ -29,7 +29,7 @@ public class MoodAnalyzerTest {
         Assert.assertEquals( "HAPPY", mood );
     }
     @Test
-    public void given_Null_ShouldReturn_NullExceptionMessage() throws MoodAnalyzerException {
+    public void given_Null_ShouldReturn_NullExceptionMessage() {
         MoodAnalyzer moodAnalyzer = new MoodAnalyzer();
         try {
             String mood = moodAnalyzer.analyzeMood( null );
@@ -38,10 +38,10 @@ public class MoodAnalyzerTest {
         }
     }
     @Test
-    public void given_Empty_ShouldReturn_EmptyExceptionMessage() throws MoodAnalyzerException {
+    public void given_Empty_ShouldReturn_EmptyExceptionMessage() {
         MoodAnalyzer moodAnalyzer = new MoodAnalyzer();
         try {
-            String mood = moodAnalyzer.analyzeMood( " " );
+            String mood = moodAnalyzer.analyzeMood( "" );
         } catch (MoodAnalyzerException e) {
             Assert.assertEquals( "Mood cannot be empty", e.getMessage() );
         }
