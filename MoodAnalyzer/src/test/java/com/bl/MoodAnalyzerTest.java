@@ -60,7 +60,7 @@ public class MoodAnalyzerTest {
     public void givenClassName_WhenImproper_Should_ThrowsMoodAnalyzerException() {
         MoodAnalyzer moodAnalyzer = new MoodAnalyzer( "im in sad mood" );
         try {
-            MoodAnalyzer moodAnalyzerReflection = MoodAnalyzerFactory.createMoodAnalyzer( "com.mood", "im in sad mood", String.class );
+            MoodAnalyzer moodAnalyzerReflection = MoodAnalyzerFactory.createMoodAnalyzer( "com.mood", "im in sad mood", null );
             Assert.assertEquals( moodAnalyzer, moodAnalyzerReflection );
         } catch (MoodAnalyzerException e) {
             Assert.assertEquals( "no such class error", e.getMessage() );

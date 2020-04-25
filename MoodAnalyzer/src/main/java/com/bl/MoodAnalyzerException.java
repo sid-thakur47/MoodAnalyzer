@@ -22,5 +22,5 @@ public class MoodAnalyzerException extends RuntimeException {
         public String getExceptionMessage() {
             return exceptions;
         }
-    }
+    }  
 }
