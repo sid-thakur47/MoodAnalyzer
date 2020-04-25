@@ -44,5 +44,5 @@ public class MoodAnalyzer extends MoodAnalyzerException {
         return "MoodAnalyzer{" +
                 "message='" + message + '\'' +
                 '}';
-    }
+    }     
 }
