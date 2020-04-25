@@ -1,6 +1,6 @@
 package com.bl;
 
-public class MoodAnalyzerException extends Exception {
+public class MoodAnalyzerException extends RuntimeException {
     String message;
 
     public MoodAnalyzerException() {
@@ -10,7 +10,10 @@ public class MoodAnalyzerException extends Exception {
         super( message );
     }
     public enum ExceptionEnum {
-        EMPTY( "Mood cannot be empty" ), NULL( "Mood cannot be null" );
+        EMPTY( "Mood cannot be empty" ),
+        NULL( "Mood cannot be null" ),
+        WRONG_CLASS( "no such class error" ),
+        WRONG_METHOD( "no such method error" );
 
         private final String exceptions;
         ExceptionEnum(String exceptions) {

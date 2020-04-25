@@ -31,4 +31,18 @@ public class MoodAnalyzer extends MoodAnalyzerException {
     public String analyzeMood() throws MoodAnalyzerException {
         return analyzeMood( this.message );
     }
+    @Override
+    public boolean equals(Object obj) {
+        MoodAnalyzer moodAnalyzer = (MoodAnalyzer) obj;
+        if ((this.message == null) && (moodAnalyzer.message == null)) {
+            return true;
+        }
+        return this.message.equals( moodAnalyzer.message );
+    }
+    @Override
+    public String toString() {
+        return "MoodAnalyzer{" +
+                "message='" + message + '\'' +
+                '}';
+    }
 }

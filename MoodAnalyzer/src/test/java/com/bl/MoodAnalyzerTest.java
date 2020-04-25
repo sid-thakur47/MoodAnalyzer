@@ -46,4 +46,15 @@ public class MoodAnalyzerTest {
             Assert.assertEquals( "Mood cannot be empty", e.getMessage() );
         }
     }
+    @Test
+    public void givenWithDefaultConstMoodAnalyzerClass_WhenProper_ShouldReturnObject() {
+        MoodAnalyzer mood = new MoodAnalyzer( "im in sad mood" );
+        try {
+            MoodAnalyzer moodAnalyzer = MoodAnalyzerFactory.createMoodAnalyzer( "im in sad mood" );
+            Assert.assertEquals( mood, moodAnalyzer );
+        } catch (MoodAnalyzerException e) {
+            System.out.println( e.toString() );
+        }
+    }
 }
+
