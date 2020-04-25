@@ -61,7 +61,6 @@ public class MoodAnalyzerTest {
         MoodAnalyzer moodAnalyzer = new MoodAnalyzer( "im in sad mood" );
         try {
             MoodAnalyzer moodAnalyzerReflection = MoodAnalyzerFactory.createMoodAnalyzer( "com.mood", "im in sad mood", String.class );
-            System.out.println( moodAnalyzerReflection );
             Assert.assertEquals( moodAnalyzer, moodAnalyzerReflection );
         } catch (MoodAnalyzerException e) {
             Assert.assertEquals( "no such class error", e.getMessage() );
@@ -73,7 +72,6 @@ public class MoodAnalyzerTest {
         MoodAnalyzer moodAnalyzer = new MoodAnalyzer( "im in sad mood" );
         try {
             MoodAnalyzer moodAnalyzerReflection = MoodAnalyzerFactory.createMoodAnalyzer( "com.bl.MoodAnalyzer", "im in sad mood", Integer.class );
-            System.out.println( moodAnalyzerReflection );
             Assert.assertEquals( moodAnalyzer, moodAnalyzerReflection );
         } catch (MoodAnalyzerException e) {
             Assert.assertEquals( "no such method error", e.getMessage() );
