@@ -16,6 +16,8 @@ public class MoodAnalyzerFactory {
             Constructor<?> moodAnalyzerConstructor = moodAnalyzerClass.getConstructor( constName );
             Object moodObj = moodAnalyzerConstructor.newInstance( message );
             return (MoodAnalyzer) moodObj;
+        } catch (MoodAnalyzerException e) {
+            throw new MoodAnalyzerException( MoodAnalyzerException.ExceptionEnum.EMPTY.getExceptionMessage() );
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
         } catch (ClassNotFoundException e) {
             throw new MoodAnalyzerException( MoodAnalyzerException.ExceptionEnum.WRONG_CLASS.getExceptionMessage() );
@@ -25,11 +27,11 @@ public class MoodAnalyzerFactory {
         return null;
     }
 
-    public static String factoryMethod(MoodAnalyzer moodAnalyzerReflection, String methodName) {
+    public static String factoryMethod(MoodAnalyzer moodAnalyzerReflection, String methodName) throws InvocationTargetException{
         try {
             Method method = moodAnalyzerReflection.getClass().getDeclaredMethod( methodName );
             return (String) method.invoke( moodAnalyzerReflection );
-        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+        } catch (NoSuchMethodException | IllegalAccessException e) {
             throw new MoodAnalyzerException( MoodAnalyzerException.ExceptionEnum.WRONG_METHOD.getExceptionMessage() );
         }
     }

@@ -5,8 +5,8 @@ public class MoodAnalyzer extends MoodAnalyzerException {
     String message;
 
     public MoodAnalyzer() {
-//        this.message = "HAPPY";
     }
+
     public MoodAnalyzer(String message) {
         this.message = message;
     }

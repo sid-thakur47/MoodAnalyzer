@@ -3,6 +3,8 @@ package com.bl;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.lang.reflect.InvocationTargetException;
+
 public class MoodAnalyzerTest {
     @Test
     public void given_Message_InConstructor_IamInSadMood_ShouldReturnSad() throws MoodAnalyzerException {
@@ -77,8 +79,21 @@ public class MoodAnalyzerTest {
             MoodAnalyzer moodAnalyzerReflection = MoodAnalyzerFactory.createMoodAnalyzer( "im in happy mood" );
             String mood = MoodAnalyzerFactory.factoryMethod( moodAnalyzerReflection, "analyzeMood" );
             Assert.assertEquals( "HAPPY", mood );
-        } catch (MoodAnalyzerException e) {
+        } catch (MoodAnalyzerException | InvocationTargetException e) {
             e.printStackTrace();
+        }
+    }
+    @Test
+    public void givenHappyMessageInReflection_WhenImProper_Should_ReturnHappy() {
+        try {
+            MoodAnalyzer moodAnalyzerReflection = MoodAnalyzerFactory.createMoodAnalyzer( "" );
+            String mood = MoodAnalyzerFactory.factoryMethod( moodAnalyzerReflection, "analyzeMookkkd" );
+        }catch (InvocationTargetException e){
+            Assert.assertEquals( "Mood cannot be empty",e.getTargetException().getMessage() );
+        }
+        catch (MoodAnalyzerException e) {
+            Assert.assertEquals( "no such method error", e.getMessage() );
+            System.out.println( e.toString() );
         }
     }
 }
