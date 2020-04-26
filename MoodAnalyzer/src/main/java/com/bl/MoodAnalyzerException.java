@@ -14,7 +14,8 @@ public class MoodAnalyzerException extends RuntimeException {
         NULL( "Mood cannot be null" ),
         WRONG_CLASS( "no such class error" ),
         WRONG_METHOD( "no such method error" ),
-        WRONG_FIELD("no such field");
+        WRONG_FIELD( "no such field" ),
+        NULL_FILED( "field cannot be null" );
 
         private final String exceptions;
         ExceptionEnum(String exceptions) {
@@ -23,5 +24,5 @@ public class MoodAnalyzerException extends RuntimeException {
         public String getExceptionMessage() {
             return exceptions;
         }
-    }  
+    }
 }

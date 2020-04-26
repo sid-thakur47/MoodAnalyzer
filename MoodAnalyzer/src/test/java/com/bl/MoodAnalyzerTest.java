@@ -37,6 +37,7 @@ public class MoodAnalyzerTest {
             String mood = moodAnalyzer.analyzeMood( null );
         } catch (MoodAnalyzerException e) {
             Assert.assertEquals( "Mood cannot be null", e.getMessage() );
+            System.out.println( e.toString() );
         }
     }
     @Test
@@ -46,9 +47,9 @@ public class MoodAnalyzerTest {
             String mood = moodAnalyzer.analyzeMood( "" );
         } catch (MoodAnalyzerException e) {
             Assert.assertEquals( "Mood cannot be empty", e.getMessage() );
+            System.out.println( e.toString() );
         }
     }
-    //5.1
     @Test
     public void givenWithDefaultConstMoodAnalyzerClass_WhenProper_ShouldReturnObject() {
         MoodAnalyzer mood = new MoodAnalyzer( "im in happy mood" );
@@ -96,18 +97,28 @@ public class MoodAnalyzerTest {
         }
     }
     @Test
-    public void settingHappyMessageWithReflector_should_ReturnHappy() throws InvocationTargetException {
+    public void settingHappyMessageWithReflector_Should_ReturnHappy() throws InvocationTargetException {
         MoodAnalyzer moodAnalyzerReflection = MoodAnalyzerFactory.createMoodAnalyzer();
         String field = MoodAnalyzerFactory.changeMood( moodAnalyzerReflection, "im in happy mood", "message" );
         Assert.assertEquals( "HAPPY", field );
     }
     @Test
-    public void field_WhenImproper_Should_ThrowException() {
+    public void field_WhenSetImproper_Should_ThrowMoodAnalyzerException() {
         try {
             MoodAnalyzer moodAnalyzerReflection = MoodAnalyzerFactory.createMoodAnalyzer();
             String field = MoodAnalyzerFactory.changeMood( moodAnalyzerReflection, "im in happy mood", "abc" );
         } catch (MoodAnalyzerException | InvocationTargetException e) {
             Assert.assertEquals( "no such field", e.getMessage() );
+            System.out.println( e.toString() );
+        }
+    }
+    @Test
+    public void settingNullMessage_Should_ThrowMoodAnalyzerException() {
+        try {
+            MoodAnalyzer moodAnalyzerReflection = MoodAnalyzerFactory.createMoodAnalyzer();
+            String field = MoodAnalyzerFactory.changeMood( moodAnalyzerReflection, "im in happy mood", null );
+        } catch (MoodAnalyzerException | InvocationTargetException e) {
+            Assert.assertEquals( "field cannot be null", e.getMessage() );
             System.out.println( e.toString() );
         }
     }
