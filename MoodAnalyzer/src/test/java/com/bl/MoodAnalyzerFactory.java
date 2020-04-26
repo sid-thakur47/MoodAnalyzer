@@ -2,8 +2,13 @@ package com.bl;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 public class MoodAnalyzerFactory {
+
+    public static MoodAnalyzer createMoodAnalyzer(String message) {
+        return createMoodAnalyzer( "com.bl.MoodAnalyzer", message, String.class );
+    }
 
     public static MoodAnalyzer createMoodAnalyzer(String className, String message, Class constName) {
         try {
@@ -19,7 +24,13 @@ public class MoodAnalyzerFactory {
         }
         return null;
     }
-    public static MoodAnalyzer createMoodAnalyzer(String message) {
-        return createMoodAnalyzer( "com.bl.MoodAnalyzer", message, String.class );
+
+    public static String factoryMethod(MoodAnalyzer moodAnalyzerReflection, String methodName) {
+        try {
+            Method method = moodAnalyzerReflection.getClass().getDeclaredMethod( methodName );
+            return (String) method.invoke( moodAnalyzerReflection );
+        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+            throw new MoodAnalyzerException( MoodAnalyzerException.ExceptionEnum.WRONG_METHOD.getExceptionMessage() );
+        }
     }
 }
