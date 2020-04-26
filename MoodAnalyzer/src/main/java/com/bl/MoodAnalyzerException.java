@@ -13,7 +13,8 @@ public class MoodAnalyzerException extends RuntimeException {
         EMPTY( "Mood cannot be empty" ),
         NULL( "Mood cannot be null" ),
         WRONG_CLASS( "no such class error" ),
-        WRONG_METHOD( "no such method error" );
+        WRONG_METHOD( "no such method error" ),
+        WRONG_FIELD("no such field");
 
         private final String exceptions;
         ExceptionEnum(String exceptions) {

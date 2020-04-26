@@ -1,6 +1,7 @@
 package com.bl;
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
@@ -8,6 +9,9 @@ public class MoodAnalyzerFactory {
 
     public static MoodAnalyzer createMoodAnalyzer(String message) {
         return createMoodAnalyzer( "com.bl.MoodAnalyzer", message, String.class );
+    }
+    public static MoodAnalyzer createMoodAnalyzer() {
+        return createMoodAnalyzer( "com.bl.MoodAnalyzer", null, null );
     }
 
     public static MoodAnalyzer createMoodAnalyzer(String className, String message, Class constName) {
@@ -27,12 +31,24 @@ public class MoodAnalyzerFactory {
         return null;
     }
 
-    public static String factoryMethod(MoodAnalyzer moodAnalyzerReflection, String methodName) throws InvocationTargetException{
+    public static String factoryMethod(MoodAnalyzer moodAnalyzerReflection, String methodName) throws InvocationTargetException {
         try {
             Method method = moodAnalyzerReflection.getClass().getDeclaredMethod( methodName );
             return (String) method.invoke( moodAnalyzerReflection );
         } catch (NoSuchMethodException | IllegalAccessException e) {
             throw new MoodAnalyzerException( MoodAnalyzerException.ExceptionEnum.WRONG_METHOD.getExceptionMessage() );
         }
+    }
+    public static String changeMood(MoodAnalyzer moodAnalyzerReflection, String message, String fieldName) throws InvocationTargetException {
+        try {
+            Field field = moodAnalyzerReflection.getClass().getDeclaredField( fieldName );
+            field.set( moodAnalyzerReflection, message );
+            return factoryMethod( moodAnalyzerReflection, "analyzeMood" );
+        } catch (NoSuchFieldException e) {
+            throw new MoodAnalyzerException( MoodAnalyzerException.ExceptionEnum.WRONG_FIELD.getExceptionMessage() );
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
