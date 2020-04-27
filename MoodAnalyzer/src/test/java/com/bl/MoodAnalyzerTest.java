@@ -100,7 +100,6 @@ public class MoodAnalyzerTest {
             String mood = MoodAnalyzerFactory.factoryMethod( moodAnalyzerReflection, "analyzeMood" );
             Assert.assertEquals( "HAPPY", mood );
         } catch (MoodAnalyzerException | InvocationTargetException e) {
-            e.printStackTrace();
         }
     }
     @Test
