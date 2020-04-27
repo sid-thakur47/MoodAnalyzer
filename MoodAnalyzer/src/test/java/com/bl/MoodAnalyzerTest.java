@@ -37,7 +37,6 @@ public class MoodAnalyzerTest {
             String mood = moodAnalyzer.analyzeMood( null );
         } catch (MoodAnalyzerException e) {
             Assert.assertEquals( "Mood cannot be null", e.getMessage() );
-            System.out.println( e.toString() );
         }
     }
     @Test
@@ -47,11 +46,33 @@ public class MoodAnalyzerTest {
             String mood = moodAnalyzer.analyzeMood( "" );
         } catch (MoodAnalyzerException e) {
             Assert.assertEquals( "Mood cannot be empty", e.getMessage() );
-            System.out.println( e.toString() );
         }
     }
     @Test
     public void givenWithDefaultConstMoodAnalyzerClass_WhenProper_ShouldReturnObject() {
+        MoodAnalyzer mood = new MoodAnalyzer( "im in sad mood" );
+        MoodAnalyzer moodAnalyzer = MoodAnalyzerFactory.createMoodAnalyzer( "im in sad mood" );
+        Assert.assertEquals( mood, moodAnalyzer );
+    }
+
+    @Test
+    public void givenClass_WhenImproper_Should_ThrowsMoodAnalyzerException() {
+        try {
+            MoodAnalyzerFactory.createMoodAnalyzer( "com.mood", "im in sad mood", String.class );
+        } catch (MoodAnalyzerException e) {
+            Assert.assertEquals( "no such class error", e.getMessage() );
+        }
+    }
+    @Test
+    public void givenConstructor_WhenImproper_Should_ThrowException() {
+        try {
+            MoodAnalyzerFactory.createMoodAnalyzer( "com.bl.MoodAnalyzer", "im in sad mood", Integer.class );
+        } catch (MoodAnalyzerException e) {
+            Assert.assertEquals( "no such method error", e.getMessage() );
+        }
+    }
+    @Test
+    public void givenWithConstMoodAnalyzerClass_WhenProper_ShouldReturnObject() {
         MoodAnalyzer mood = new MoodAnalyzer( "im in happy mood" );
         MoodAnalyzer moodAnalyzer = MoodAnalyzerFactory.createMoodAnalyzer( "im in happy mood" );
         Assert.assertEquals( mood, moodAnalyzer );
@@ -62,7 +83,6 @@ public class MoodAnalyzerTest {
             MoodAnalyzerFactory.createMoodAnalyzer( "com.mood", "im in sad mood", String.class );
         } catch (MoodAnalyzerException e) {
             Assert.assertEquals( "no such class error", e.getMessage() );
-            System.out.println( e.toString() );
         }
     }
     @Test
@@ -71,7 +91,6 @@ public class MoodAnalyzerTest {
             MoodAnalyzerFactory.createMoodAnalyzer( "com.bl.MoodAnalyzer", "im in sad mood", Integer.class );
         } catch (MoodAnalyzerException e) {
             Assert.assertEquals( "no such method error", e.getMessage() );
-            System.out.println( e.toString() );
         }
     }
     @Test
@@ -85,15 +104,20 @@ public class MoodAnalyzerTest {
         }
     }
     @Test
+    public void givenHappyMethodInReflection_WhenImProper_Should_ReturnHappy() {
+        try {
+            MoodAnalyzer moodAnalyzerReflection = MoodAnalyzerFactory.createMoodAnalyzer();
+            MoodAnalyzerFactory.factoryMethod( moodAnalyzerReflection, "analyzeMood" );
+        } catch (MoodAnalyzerException | InvocationTargetException e) {
+            Assert.assertEquals( "no such method error", e.getMessage() );
+        }
+    }
+    @Test
     public void givenHappyMessageInReflection_WhenImProper_Should_ReturnHappy() {
         try {
-            MoodAnalyzer moodAnalyzerReflection = MoodAnalyzerFactory.createMoodAnalyzer( "" );
-            String mood = MoodAnalyzerFactory.factoryMethod( moodAnalyzerReflection, "analyzeMookkkd" );
-        } catch (InvocationTargetException e) {
-            Assert.assertEquals( "Mood cannot be empty", e.getTargetException().getMessage() );
+            MoodAnalyzer moodAnalyzerReflection = MoodAnalyzerFactory.createMoodAnalyzer();
         } catch (MoodAnalyzerException e) {
-            Assert.assertEquals( "no such method error", e.getMessage() );
-            System.out.println( e.toString() );
+            Assert.assertEquals( "Mood cannot be empty", e.getMessage() );
         }
     }
     @Test
@@ -106,20 +130,18 @@ public class MoodAnalyzerTest {
     public void field_WhenSetImproper_Should_ThrowMoodAnalyzerException() {
         try {
             MoodAnalyzer moodAnalyzerReflection = MoodAnalyzerFactory.createMoodAnalyzer();
-            String field = MoodAnalyzerFactory.changeMood( moodAnalyzerReflection, "im in happy mood", "abc" );
+            MoodAnalyzerFactory.changeMood( moodAnalyzerReflection, "im in happy mood", "abc" );
         } catch (MoodAnalyzerException | InvocationTargetException e) {
             Assert.assertEquals( "no such field", e.getMessage() );
-            System.out.println( e.toString() );
         }
     }
     @Test
     public void settingNullMessage_Should_ThrowMoodAnalyzerException() {
         try {
             MoodAnalyzer moodAnalyzerReflection = MoodAnalyzerFactory.createMoodAnalyzer();
-            String field = MoodAnalyzerFactory.changeMood( moodAnalyzerReflection, "im in happy mood", null );
+            MoodAnalyzerFactory.changeMood( moodAnalyzerReflection, "im in happy mood", null );
         } catch (MoodAnalyzerException | InvocationTargetException e) {
             Assert.assertEquals( "field cannot be null", e.getMessage() );
-            System.out.println( e.toString() );
         }
     }
 }
