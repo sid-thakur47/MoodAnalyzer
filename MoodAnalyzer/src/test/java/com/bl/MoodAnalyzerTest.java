@@ -144,4 +144,4 @@ public class MoodAnalyzerTest {
             Assert.assertEquals( "field cannot be null", e.getMessage() );
         }
     }
-}
+}  
